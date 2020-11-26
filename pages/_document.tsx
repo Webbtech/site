@@ -46,7 +46,8 @@ export default class MyDocument extends Document {
         <Head>
           <meta name='description' content={description} />
           <link href={fontsUrl} rel='stylesheet' />
-          <link rel='stylesheet' href='spectre.min.css' />
+          {/* <link rel='stylesheet' href='../styles/index.css' /> */}
+          {/* <link rel='stylesheet' href='spectre.min.css' /> */}
           {/* <link rel='stylesheet' href='spectre-exp.min.css' /> */}
           {/* // <link rel='stylesheet' href='spectre-icons.min.css' /> */}
           {this.props.styles}

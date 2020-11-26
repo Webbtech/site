@@ -1,15 +1,17 @@
 import React from 'react'
 import Head from 'next/head'
-import { ThemeProvider } from 'styled-components'
+// import { ThemeProvider } from 'styled-components'
+
+import '../styles/index.css'
 
 import { Center } from '../components/Center'
 import { Header } from '../components/Header/Header'
-import { GlobalStyle, theme } from '../shared/theme'
+// import { GlobalStyle, theme } from '../shared/theme'
 
 function MainApp({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle theme={theme} />
+
+      <>
       <Head>
         <title>Webbtech - Home</title>
         <meta name="description" content="Webbtech Home Site" />
@@ -21,7 +23,8 @@ function MainApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </Center>
       </main>
-    </ThemeProvider>
+      </>
+
   )
 }
 
