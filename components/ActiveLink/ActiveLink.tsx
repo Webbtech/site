@@ -1,29 +1,39 @@
 import React, { FunctionComponent } from 'react'
 
-import classnames from 'classnames'
 import { useRouter } from 'next/router'
 
 interface LinkProps {
   href: string
+  classes: string
+  activeClasses: string
+  callbackFunc?: Function
 }
 
 export const ActiveLink: FunctionComponent<LinkProps> = ({
   children,
+  classes,
+  callbackFunc,
+  activeClasses,
   href,
 }) => {
   const router = useRouter()
-  const liClassName = classnames('tab-item', router.pathname === href && 'active')
+  const testActive = () => router.pathname === href && true
+  const isActive = testActive()
+  const liClassName = isActive
+    ? activeClasses
+    : classes
 
   const handleClick = (e) => {
     e.preventDefault()
     router.push(href)
+    if (callbackFunc) {
+      callbackFunc(false)
+    }
   }
 
   return (
-    <li className={liClassName}>
-      <a href={href} onClick={handleClick}>
-        {children}
-      </a>
-    </li>
+    <a className={liClassName} href={href} onClick={handleClick}>
+      {children}
+    </a>
   )
 }

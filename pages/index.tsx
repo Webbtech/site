@@ -6,7 +6,7 @@ import Rotate from 'react-reveal/Rotate'
 import Slide from 'react-reveal/Slide'
 
 
-import { CardContainer } from './style'
+import { CardContainer } from '../components/style'
 
 const Index: FunctionComponent = () => {
   return (

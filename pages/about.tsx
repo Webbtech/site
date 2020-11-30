@@ -7,7 +7,7 @@ import Zoom from 'react-reveal/Zoom'
 import Slide from 'react-reveal/Slide'
 import styled, { css } from 'styled-components'
 
-import { CardContainer } from './style'
+import { CardContainer } from '../components/style'
 
 const width = '300px',
   height = '150px'
