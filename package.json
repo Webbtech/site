@@ -1,30 +1,33 @@
 {
-  "name": "webbtech-site",
-  "version": "0.0.1",
-  "description": "Webbtech public site",
-  "main": "index.js",
-  "repository": "https://github.com/pulpfree/webbtech-site",
-  "author": "Ron Dyck <rond@webbtech.net>",
-  "license": "MIT",
-  "private": false,
+  "private": true,
   "scripts": {
+    "dev": "next",
     "build": "next build",
     "start": "next start",
-    "serve": "ts-node -O '{\"module\": \"commonjs\"}' ./server/index.ts",
-    "dev": "concurrently --kill-others \"yarn serve\" \"next\""
+    "type-check": "tsc",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
-    "next": "^10.0.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-reveal": "^1.2.2",
-    "react-spring": "^8.0.27",
-    "styled-components": "^5.2.1"
+    "next": "latest",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@types/node": "^14.14.7",
-    "@types/react": "^16.9.56",
-    "typescript": "^4.0.5"
+    "@fullhuman/postcss-purgecss": "^4.0.3",
+    "@types/node": "^12.12.21",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "autoprefixer": "^10.4.0",
+    "eslint": "<8.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "postcss": "^8.3.11",
+    "prettier": "^2.4.1",
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.4.4"
   }
 }
