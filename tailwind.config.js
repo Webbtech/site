@@ -8,11 +8,12 @@ module.exports = {
       colors: {
         teal: colors.teal,
         cyan: colors.cyan,
+        'blue-accent': '#2BA9B4',
       },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/aspect-ratio')],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms'), require('@tailwindcss/aspect-ratio')],
 }

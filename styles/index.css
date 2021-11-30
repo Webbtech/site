@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .ftr-link {
+    @apply text-gray-600 hover:text-blue-accent uppercase font-semibold
+  }
+}

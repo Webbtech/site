@@ -6,10 +6,9 @@ import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const navigation = [
+  { name: 'Services', href: '/services', current: false },
   { name: 'About', href: '/about', current: false },
   { name: 'Contact', href: '/contact', current: false },
-  { name: 'Projects', href: '/test', current: false },
-  { name: 'Projects2', href: '/test2', current: false },
 ]
 
 function classNames(...classes: any) { // eslint-disable-line
@@ -59,7 +58,7 @@ export default function Header(): JSX.Element {
                               item.current
                                 ? 'bg-gray-800 text-white'
                                 : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                              'px-3 py-2 rounded-md text-sm font-medium',
+                              'px-3 py-2 rounded-md text-base font-medium',
                             )}
                             aria-current={item.current ? 'page' : undefined}
                           >
@@ -80,7 +79,7 @@ export default function Header(): JSX.Element {
                 <Disclosure.Button
                   key={item.name}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    item.current ? 'bg-gray-800 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                     'block px-3 py-2 rounded-md text-base font-medium',
                   )}
                   aria-current={item.current ? 'page' : undefined}

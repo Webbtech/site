@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import Head from 'next/head'
 
+import Footer from './Footer'
 import Header from './Header'
 
 type Props = {
@@ -24,7 +25,8 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
     </Head>
     <Header />
     {children}
-    <footer className='flex items-center justify-center w-full h-24 border-t'>
+    <Footer />
+    {/* <footer className='flex items-center justify-center w-full h-24 border-t'>
       <hr />
       <a
         className='flex items-center justify-center'
@@ -34,7 +36,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       >
         Powered by <img src='../vercel.svg' alt='Vercel Logo' className='h-4 ml-2' />
       </a>
-    </footer>
+    </footer> */}
   </div>
 )
 
