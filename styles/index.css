@@ -1,9 +1,14 @@
+/* purgecss start ignore */
 @tailwind base;
 @tailwind components;
+/* purgecss end ignore */
 @tailwind utilities;
 
 @layer components {
   .ftr-link {
     @apply text-gray-600 hover:text-blue-accent uppercase font-semibold
+  }
+  .basic-link {
+    @apply text-base font-medium text-blue-accent hover:text-gray-600
   }
 }
