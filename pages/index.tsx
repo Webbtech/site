@@ -1,4 +1,7 @@
 import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+
 import Layout from '../components/Layout'
 
 const IndexPage = () => (
@@ -26,6 +29,13 @@ const IndexPage = () => (
                 <p className='text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
                   Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet
                   purus dui laoreet diam sed lacus, fames. Dui, amet, nec sit pulvinar.
+                </p>
+                <p className='text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
+                  <Link href='/contact'>
+                    <a className='basic-link text-xl'>
+                      Contact us<span aria-hidden='true'> &rarr;</span>
+                    </a>
+                  </Link>
                 </p>
               </div>
             </div>
