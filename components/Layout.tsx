@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import Head from 'next/head'
+import Script from 'next/script'
 
 import Footer from './Footer'
 import Header from './Header'
@@ -11,6 +12,16 @@ type Props = {
 
 const Layout = ({ children, title = 'This is the default title' }: Props) => (
   <div>
+    <Script src='https://www.googletagmanager.com/gtag/js?id=G-HC15078JGQ' strategy='afterInteractive' />
+    <Script id='google-analytics' strategy='afterInteractive'>
+      {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-HC15078JGQ');
+      `}
+    </Script>
     <Head>
       <title>{title}</title>
       <meta charSet='utf-8' />
