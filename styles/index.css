@@ -11,4 +11,13 @@
   .basic-link {
     @apply text-base font-medium text-blue-accent hover:text-gray-600
   }
+  .form-input {
+    @apply py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-blue-accent focus:border-blue-accent border-gray-300 rounded-md
+  }
+  .form-label {
+    @apply block text-sm font-medium text-gray-900
+  }
+  .form-error {
+    @apply text-red-600 text-sm
+  }
 }

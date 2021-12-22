@@ -6,9 +6,10 @@ import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const navigation = [
-  { name: 'Services', href: '/services', current: false },
-  { name: 'About', href: '/about', current: false },
+  // { name: 'Services', href: '/services', current: false },
+  // { name: 'About', href: '/about', current: false },
   { name: 'Contact', href: '/contact', current: false },
+  // { name: 'Users', href: '/users', current: false },
 ]
 
 function classNames(...classes: any) { // eslint-disable-line

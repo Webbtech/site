@@ -1,19 +1,79 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+// import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
+import * as yup from 'yup'
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
 
 import Layout from '../components/Layout'
 
+// this is a tmp fix as react-hook-form is working on this issue: https://github.com/react-hook-form/resolvers/issues/271
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { yupResolver } = require('@hookform/resolvers/yup')
+
+// react-hook-form example: https://react-hook-form.com/get-started#TypeScript'
+// example with Yup validation: https://jasonwatmore.com/post/2021/09/03/next-js-form-validation-example-with-react-hook-form
+interface IFormInput {
+  firstName: string
+  lastName: string
+  email: string
+  message: string
+  phone: string
+  type: string
+}
+
+const schema = yup.object({
+  firstName: yup.string().required('First name is required').max(20, 'First name cannot be longer than 20 characters'),
+  lastName: yup
+    .string()
+    .required('Last name is required')
+    .max(20, 'Last name cannot be longer than 20 characters')
+    .matches(/^[a-z\']+$/i, "Last name must consist of a-z and ' characters"),
+  email: yup.string().required('Email is required').email('Email is invalid'),
+  type: yup.string().required('Type is required'),
+  message: yup.string().required('Message is required').max(500),
+  phone: yup
+    .string()
+    .when('type', { is: 'callback', then: yup.string().required('Phone is required when Type is Callback') }),
+})
+
 export default function Contact() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>({ resolver: yupResolver(schema) })
+
+  const [showConfirm, setShowConfirm] = useState(false)
+  const formMsg = showConfirm
+    ? 'Thanks so much! Your message is on the way to our desks.'
+    : 'Send us a message, we would love to hear from you!'
+
+  const onSubmit: SubmitHandler<IFormInput> = async (data, e) => {
+    const ret = await fetch('/api/contact', {
+      method: 'post',
+      body: JSON.stringify(data),
+    })
+    // console.log('ret: ', ret)
+    // console.log('ret: ', ret.statusText)
+    // console.log('body: ', await ret.body)
+    if (ret.statusText !== 'OK') {
+      console.error('Error response: ', ret)
+    }
+    e?.target.reset()
+    window.scrollTo(0, 0)
+    setShowConfirm(true)
+  }
+
   return (
     <Layout title='Contact | Webbtech'>
       <div className='bg-gray-100'>
-        <div className='max-w-7xl mx-auto py-16 px-4 sm:py-20 sm:px-6 lg:px-8'>
+        <div className='max-w-7xl mx-auto py-10 px-4 sm:px-6 xl:py-20 lg:px-8'>
           <div className='relative bg-white shadow-xl rounded-2xl '>
             <h2 className='sr-only'>Contact us</h2>
 
             <div className='grid grid-cols-1 lg:grid-cols-3'>
               {/* Contact information */}
-              <div className='relative overflow-hidden py-10 px-6 bg-gray-800 sm:px-10 xl:p-12 rounded-l-2xl '>
+              <div className='relative overflow-hidden py-10 px-6 bg-gray-800 sm:px-10 xl:p-12 rounded-t-2xl lg:rounded-t-none lg:rounded-l-2xl '>
                 <div className='absolute inset-0 pointer-events-none sm:hidden' aria-hidden='true'>
                   <svg
                     className='absolute inset-0 w-full h-full'
@@ -112,8 +172,14 @@ export default function Contact() {
                 </div>
                 <h3 className='text-3xl font-medium text-white'>Contact Information</h3>
                 <p className='mt-6 text-base text-indigo-50 max-w-3xl'>
-                  Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst amet. Sapien tortor
-                  lacus arcu.
+                  Location:
+                  <br />
+                  Welland, Ontario, Canada
+                </p>
+                <p className='mt-6 text-base text-indigo-50 max-w-3xl'>
+                  Office Hours:
+                  <br />
+                  Mon-Fri 9:00AM to 5:00PM
                 </p>
                 <dl className='mt-8 space-y-6'>
                   <dt>
@@ -204,53 +270,65 @@ export default function Contact() {
 
               {/* Contact form */}
               <div className='py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12'>
-                <h3 className='text-lg font-medium text-gray-900'>Send us a message</h3>
-                <form action='#' method='POST' className='mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8'>
+                <h3 className='sm:text-xl md:text-2xl font-medium text-gray-900'>{formMsg}</h3>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className='mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8'
+                >
                   <div>
-                    <label htmlFor='first-name' className='block text-sm font-medium text-gray-900'>
+                    <label htmlFor='firstName' className='form-label'>
                       First name
                     </label>
                     <div className='mt-1'>
                       <input
-                        type='text'
-                        name='first-name'
-                        id='first-name'
+                        {...register('firstName')}
                         autoComplete='given-name'
-                        className='py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-blue-accent focus:border-blue-accent border-gray-300 rounded-md'
+                        className='form-input'
+                        id='firstName'
+                        name='firstName'
+                        type='text'
                       />
+                      <p className='form-error'>{errors.firstName?.message}</p>
                     </div>
                   </div>
+
                   <div>
-                    <label htmlFor='last-name' className='block text-sm font-medium text-gray-900'>
+                    <label htmlFor='lastName' className='form-label'>
                       Last name
                     </label>
                     <div className='mt-1'>
                       <input
-                        type='text'
-                        name='last-name'
-                        id='last-name'
+                        {...register('lastName')}
                         autoComplete='family-name'
-                        className='py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-blue-accent focus:border-blue-accent border-gray-300 rounded-md'
+                        className='form-input'
+                        id='lastName'
+                        name='lastName'
+                        type='text'
                       />
+                      <p className='form-error'>{errors.lastName?.message}</p>
                     </div>
                   </div>
+
                   <div>
-                    <label htmlFor='email' className='block text-sm font-medium text-gray-900'>
+                    <label htmlFor='email' className='form-label'>
                       Email
                     </label>
                     <div className='mt-1'>
                       <input
+                        {...register('email')}
+                        autoComplete='email'
+                        className='form-input'
                         id='email'
                         name='email'
                         type='email'
-                        autoComplete='email'
-                        className='py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-blue-accent focus:border-blue-accent border-gray-300 rounded-md'
                       />
+                      <p className='form-error'>{errors.email?.message}</p>
                     </div>
                   </div>
+
                   <div>
                     <div className='flex justify-between'>
-                      <label htmlFor='phone' className='block text-sm font-medium text-gray-900'>
+                      <label htmlFor='phone' className='form-label'>
                         Phone
                       </label>
                       <span id='phone-optional' className='text-sm text-gray-500'>
@@ -259,31 +337,36 @@ export default function Contact() {
                     </div>
                     <div className='mt-1'>
                       <input
-                        type='text'
-                        name='phone'
-                        id='phone'
-                        autoComplete='tel'
-                        className='py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-blue-accent focus:border-blue-accent border-gray-300 rounded-md'
+                        {...register('phone')}
                         aria-describedby='phone-optional'
+                        autoComplete='tel'
+                        className='form-input'
+                        id='phone'
+                        name='phone'
+                        type='text'
                       />
+                      <p className='form-error'>{errors.phone?.message}</p>
                     </div>
                   </div>
-                  <div className='sm:col-span-2'>
-                    <label htmlFor='subject' className='block text-sm font-medium text-gray-900'>
-                      Subject
+
+                  <div>
+                    <label htmlFor='subject' className='form-label'>
+                      Type
                     </label>
                     <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='subject'
-                        id='subject'
-                        className='py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-blue-accent focus:border-blue-accent border-gray-300 rounded-md'
-                      />
+                      <select {...register('type')} className='form-input'>
+                        <option value=''></option>
+                        <option value='callback'>Callback</option>
+                        <option value='comment'>Comment</option>
+                        <option value='question'>Question</option>
+                      </select>
+                      <p className='form-error'>{errors.type?.message}</p>
                     </div>
                   </div>
+
                   <div className='sm:col-span-2'>
                     <div className='flex justify-between'>
-                      <label htmlFor='message' className='block text-sm font-medium text-gray-900'>
+                      <label htmlFor='message' className='form-label'>
                         Message
                       </label>
                       <span id='message-max' className='text-sm text-gray-500'>
@@ -292,15 +375,18 @@ export default function Contact() {
                     </div>
                     <div className='mt-1'>
                       <textarea
+                        {...register('message')}
+                        aria-describedby='message-max'
+                        className='form-input'
+                        defaultValue={''}
                         id='message'
                         name='message'
                         rows={4}
-                        className='py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-blue-accent focus:border-blue-accent border border-gray-300 rounded-md'
-                        aria-describedby='message-max'
-                        defaultValue={''}
                       />
+                      <p className='form-error'>{errors.message?.message}</p>
                     </div>
                   </div>
+
                   <div className='sm:col-span-2 sm:flex sm:justify-end'>
                     <button
                       type='submit'
