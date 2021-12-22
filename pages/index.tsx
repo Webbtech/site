@@ -24,12 +24,13 @@ const IndexPage = () => (
                   Find yourself confused understanding the latest architectures?
                 </p>
                 <p className='text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
-                  At Webbtech we work hard to stay up-to-date on all the latest technologies required to ...
+                  At Webbtech we work hard to stay up-to-date on all the latest technologies required to build your next
+                  SaaS product, mobile application or eCommerce solution.
                 </p>
-                <p className='text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
+                {/* <p className='text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
                   Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet
                   purus dui laoreet diam sed lacus, fames. Dui, amet, nec sit pulvinar.
-                </p>
+                </p> */}
                 <p className='text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
                   <Link href='/contact'>
                     <a className='basic-link text-xl'>

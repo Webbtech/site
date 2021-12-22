@@ -72,7 +72,7 @@ export default function Example() {
                 </div>
                 <div className='p-6 bg-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8'>
                   <Link href={link.href}>
-                    <a className='text-base font-medium text-blue-accent hover:text-gray-600'>
+                    <a className='basic-link'>
                       Contact us<span aria-hidden='true'> &rarr;</span>
                     </a>
                   </Link>
