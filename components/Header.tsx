@@ -42,7 +42,7 @@ export default function Header(): JSX.Element {
                 </Disclosure.Button>
               </div>
               <div className='flex-1 flex items-center justify-center sm:items-stretch'>
-                <Link href='/'>
+                <Link href='/' passHref>
                   <div className='flex-shrink-0 flex items-center'>
                     <img className='block lg:hidden h-8 w-auto' src='/logo.svg' alt='Webbtech' />
                     <img className='hidden lg:block h-12 w-auto' src='/logo.svg' alt='Webbtech' />
