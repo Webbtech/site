@@ -62,7 +62,7 @@ export default function Contact() {
     }
     // const elmnt = document.getElementById('top') as HTMLElement
     e?.target.reset()
-    window.scrollTo({ top: 70, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     setShowConfirm(true)
   }
 
