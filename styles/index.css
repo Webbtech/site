@@ -21,3 +21,8 @@
     @apply text-red-600 text-sm
   }
 }
+
+html {
+  scroll-behavior: smooth;
+  height: 10%;
+}

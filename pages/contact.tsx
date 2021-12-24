@@ -6,6 +6,8 @@ import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
 
 import Layout from '../components/Layout'
 
+// Some tips on animations: https://play.tailwindcss.com/YeZIs0aejf
+
 // this is a tmp fix as react-hook-form is working on this issue: https://github.com/react-hook-form/resolvers/issues/271
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { yupResolver } = require('@hookform/resolvers/yup')
@@ -36,6 +38,11 @@ const schema = yup.object({
     .when('type', { is: 'callback', then: yup.string().required('Phone is required when Type is Callback') }),
 })
 
+// TODO: put this in a common utility file
+function classNames(...classes: any) { // eslint-disable-line
+  return classes.filter(Boolean).join(' ')
+}
+
 export default function Contact() {
   const {
     register,
@@ -44,29 +51,24 @@ export default function Contact() {
   } = useForm<IFormInput>({ resolver: yupResolver(schema) })
 
   const [showConfirm, setShowConfirm] = useState(false)
-  const formMsg = showConfirm
-    ? 'Thanks so much! Your message is on the way to our desks.'
-    : 'Send us a message, we would love to hear from you!'
 
   const onSubmit: SubmitHandler<IFormInput> = async (data, e) => {
     const ret = await fetch('/api/contact', {
       method: 'post',
       body: JSON.stringify(data),
     })
-    // console.log('ret: ', ret)
-    // console.log('ret: ', ret.statusText)
-    // console.log('body: ', await ret.body)
     if (ret.statusText !== 'OK') {
       console.error('Error response: ', ret)
     }
+    // const elmnt = document.getElementById('top') as HTMLElement
     e?.target.reset()
-    window.scrollTo(0, 0)
+    window.scrollTo({ top: 70, behavior: 'smooth' })
     setShowConfirm(true)
   }
 
   return (
     <Layout title='Contact | Webbtech'>
-      <div className='bg-gray-100'>
+      <div className='bg-gray-100' id='top'>
         <div className='max-w-7xl mx-auto py-10 px-4 sm:px-6 xl:py-20 lg:px-8'>
           <div className='relative bg-white shadow-xl rounded-2xl '>
             <h2 className='sr-only'>Contact us</h2>
@@ -270,10 +272,35 @@ export default function Contact() {
 
               {/* Contact form */}
               <div className='py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12'>
-                <h3 className='sm:text-xl md:text-2xl font-medium text-gray-900'>{formMsg}</h3>
+                {/* <h3 className='sm:text-xl md:text-2xl font-medium text-gray-900'>{formMsg}</h3> */}
+                <div className='relative'>
+                  <h3
+                    className={classNames(
+                      'absolute',
+                      showConfirm ? 'animate-fade-out opacity-0' : 'opacity-100',
+                      'sm:text-xl md:text-2xl font-medium text-gray-900',
+                    )}
+                  >
+                    Send us a message, we would love to hear from you!
+                  </h3>
+                  <div
+                    className={classNames(
+                      'absolute',
+                      showConfirm ? 'animate-fade-in' : 'opacity-0',
+                      'sm:text-xl md:text-2xl font-medium text-gray-900',
+                    )}
+                  >
+                    Thanks so much!
+                    <br />
+                    Your message is on it&apos;s way to our desks
+                  </div>
+                </div>
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className='mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8'
+                  className={classNames(
+                    showConfirm && 'opacity-0 animate-fade-out',
+                    'mt-12 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8',
+                  )}
                 >
                   <div>
                     <label htmlFor='firstName' className='form-label'>
@@ -390,7 +417,7 @@ export default function Contact() {
                   <div className='sm:col-span-2 sm:flex sm:justify-end'>
                     <button
                       type='submit'
-                      className='mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-800 hover:bg-blue-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-accent sm:w-auto'
+                      className='mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gray-800 transition duration-400 ease-in-out hover:bg-blue-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-accent sm:w-auto'
                     >
                       Submit
                     </button>

@@ -5,19 +5,24 @@ import { useRouter } from 'next/router'
 import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
+let navigation: Array<{
+  name: string
+  href: string
+  current: boolean
+}>
 if (process.env.NEXT_PUBLIC_STAGE === 'development') {
-  const navigation = [
+  navigation = [
     { name: 'Services', href: '/services', current: false },
     { name: 'About', href: '/about', current: false },
     { name: 'Contact', href: '/contact', current: false },
     { name: 'Users', href: '/users', current: false },
   ]
 } else {
-  const navigation = [
-    // { name: 'Services', href: '/services', current: false },
-    // { name: 'About', href: '/about', current: false },
+  navigation = [
+    //     // { name: 'Services', href: '/services', current: false },
+    //     // { name: 'About', href: '/about', current: false },
     { name: 'Contact', href: '/contact', current: false },
-    // { name: 'Users', href: '/users', current: false },
+    //     // { name: 'Users', href: '/users', current: false },
   ]
 }
 
@@ -37,7 +42,7 @@ export default function Header(): JSX.Element {
     <Disclosure as='nav' className='bg-gray-900'>
       {({ open }) => (
         <>
-          <div className='max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-3'>
+          <div className='max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-3 md:py-5'>
             <div className='relative flex items-center justify-between sm:h-8 md:h-12 lg:h-16'>
               <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
                 {/* Mobile menu button*/}
@@ -51,12 +56,16 @@ export default function Header(): JSX.Element {
                 </Disclosure.Button>
               </div>
               <div className='flex-1 flex items-center justify-center sm:items-stretch'>
-                <Link href='/' passHref>
-                  <div className='flex-shrink-0 flex items-center'>
+                <div className='flex-shrink-0 flex items-center'>
+                  <Link href='/' passHref>
+                    <a>
+                      {/* eslint-disable-next-line */}
                     <img className='block lg:hidden h-8 w-auto' src='/logo.svg' alt='Webbtech' />
+                      {/* eslint-disable-next-line */}
                     <img className='hidden lg:block h-12 w-auto' src='/logo.svg' alt='Webbtech' />
-                  </div>
-                </Link>
+                    </a>
+                  </Link>
+                </div>
                 <div className='hidden md:flex items-center sm:ml-6'>
                   <div className='flex space-x-2'>
                     {navigation.map((item) => {

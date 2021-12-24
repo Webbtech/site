@@ -11,6 +11,23 @@ module.exports = {
         cyan: colors.cyan,
         'blue-accent': '#2BA9B4',
       },
+      // that is animation class
+      animation: {
+        'fade-in': 'fade-in 0.5s ease-out',
+        'fade-out': 'fade-out 0.5s ease-out',
+      },
+
+      // that is actual animation
+      keyframes: () => ({
+        'fade-in': {
+          '0%': { opacity: '0', transform: 'translateY(-30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0px)' },
+        },
+        'fade-out': {
+          from: { opacity: '1', transform: 'translateY(0px)' },
+          to: { opacity: '0', transform: 'translateY(-30px)' },
+        },
+      }),
     },
   },
   variants: {

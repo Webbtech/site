@@ -17,24 +17,19 @@ const IndexPage = () => (
                   <span className='md:block'>Web services for your </span>
                   <span className='md:block text-gray-500'>online business</span>
                 </h1>
-                <p className='mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
+                <p className='text-base text-gray-300 mt-3 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
                   We provide consulting and development services to help you build and grow your online business.
                 </p>
-                <p className='text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
-                  Find yourself confused understanding the latest architectures?
+
+                <p className='text-gray-300 mt-3 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
+                  At Webbtech we work hard to stay up-to-date on the latest technologies required to build your next
+                  SaaS product, web or mobile application, or eCommerce solution.
                 </p>
-                <p className='text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
-                  At Webbtech we work hard to stay up-to-date on all the latest technologies required to build your next
-                  SaaS product, mobile application or eCommerce solution.
-                </p>
-                {/* <p className='text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
-                  Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet
-                  purus dui laoreet diam sed lacus, fames. Dui, amet, nec sit pulvinar.
-                </p> */}
-                <p className='text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
-                  <Link href='/contact'>
+
+                <p className='text-gray-300 mt-3 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl'>
+                  <Link href='/services'>
                     <a className='basic-link text-xl'>
-                      Contact us<span aria-hidden='true'> &rarr;</span>
+                      Our Services<span aria-hidden='true'> &rarr;</span>
                     </a>
                   </Link>
                 </p>
@@ -43,6 +38,7 @@ const IndexPage = () => (
             {/* right cell */}
             <div className='mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative'>
               <div className='mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0'>
+                {/* eslint-disable-next-line */}
                 <img
                   className='w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none'
                   src='https://tailwindui.com/img/component-images/cloud-illustration-teal-cyan.svg'
