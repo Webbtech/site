@@ -19,7 +19,7 @@ if (process.env.NEXT_PUBLIC_STAGE === 'development') {
   ]
 } else {
   navigation = [
-    //     // { name: 'Services', href: '/services', current: false },
+    { name: 'Services', href: '/services', current: false },
     //     // { name: 'About', href: '/about', current: false },
     { name: 'Contact', href: '/contact', current: false },
     //     // { name: 'Users', href: '/users', current: false },

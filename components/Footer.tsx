@@ -10,16 +10,16 @@ let navigation: Array<{
 if (process.env.NEXT_PUBLIC_STAGE === 'development') {
   navigation = [
     { name: 'home', href: '/', current: false },
-    { name: 'Services', href: '/services', current: false },
-    { name: 'About', href: '/about', current: false },
-    { name: 'Contact', href: '/contact', current: false },
+    { name: 'services', href: '/services', current: false },
+    { name: 'about', href: '/about', current: false },
+    { name: 'contact', href: '/contact', current: false },
   ]
 } else {
   navigation = [
     { name: 'home', href: '/', current: false },
-    // { name: 'Services', href: '/services', current: false },
+    { name: 'services', href: '/services', current: false },
     // { name: 'About', href: '/about', current: false },
-    { name: 'Contact', href: '/contact', current: false },
+    { name: 'contact', href: '/contact', current: false },
   ]
 }
 
