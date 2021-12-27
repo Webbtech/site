@@ -173,24 +173,32 @@ export default function Contact() {
                   </svg>
                 </div>
                 <h3 className='text-3xl font-medium text-white'>Contact Information</h3>
-                <p className='mt-6 text-base text-indigo-50 max-w-3xl'>
-                  Location:
-                  <br />
-                  Welland, Ontario, Canada
-                </p>
-                <p className='mt-6 text-base text-indigo-50 max-w-3xl'>
-                  Office Hours:
-                  <br />
-                  Mon-Fri 9:00AM to 5:00PM
-                </p>
                 <dl className='mt-8 space-y-6'>
                   <dt>
+                    <span className='sr-only'>Location</span>
+                  </dt>
+                  <dd className='flex text-base text-gray-200'>
+                    Location:
+                    <br />
+                    Welland, Ontario, Canada
+                  </dd>
+                  <dt>
+                    <span className='sr-only'>Office Hours</span>
+                  </dt>
+                  <dd className='flex text-base text-gray-200'>
+                    Office Hours:
+                    <br />
+                    Mon-Fri 9:00AM to 5:00PM
+                  </dd>
+                </dl>
+                <dl className='mt-8 space-y-6'>
+                  {/*  <dt>
                     <span className='sr-only'>Phone number</span>
                   </dt>
                   <dd className='flex text-base text-gray-200'>
                     <PhoneIcon className='flex-shrink-0 w-6 h-6 text-gray-300' aria-hidden='true' />
                     <span className='ml-3'>+1 (905) 984-9393</span>
-                  </dd>
+                  </dd> */}
                   <dt>
                     <span className='sr-only'>Email</span>
                   </dt>
